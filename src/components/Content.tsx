@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { AppTitle } from '@/components'
 import { OccasionButton } from './OccasionButton'
 import { Cake, Snowflake } from 'lucide-react'
+import { UserDetailsSection } from './UserDetailsSection'
 
 export const Content = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -84,35 +85,20 @@ export const Content = () => {
                 />
               </div>
             </section>
+
+            <UserDetailsSection
+              name={name}
+              age={age}
+              error={error}
+              setName={setName}
+              interests={interests}
+              setAge={setAge}
+              setError={setError}
+              setInterests={setInterests}
+            />
           </div>
           <div className='lg:col-span-7 h-full'></div>
         </div>
-
-        <br />
-        <br />
-
-        <input
-          type='text'
-          value={name}
-          placeholder='Юля'
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type='text'
-          value={age}
-          placeholder='18'
-          onChange={(e) => setAge(e.target.value)}
-        />
-
-        <br />
-        <br />
-
-        <textarea
-          rows={2}
-          value={interests}
-          placeholder='Путешествия, кодинг, котики'
-          onChange={(e) => setInterests(e.target.value)}
-        ></textarea>
 
         <br />
         <br />
