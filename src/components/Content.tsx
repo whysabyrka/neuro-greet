@@ -6,6 +6,7 @@ import {
   ExtraDetailsSection,
   GenerateButton,
   OccasionButton,
+  ResultSection,
   UserDetailsSection,
 } from '@/components'
 import { Cake, Snowflake, Sparkles } from 'lucide-react'
@@ -27,6 +28,10 @@ export const Content = () => {
   const [error, setError] = useState<string | null>(null)
 
   const [isImageEnabled, setIsImageEnabled] = useState<boolean>(false)
+
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
+    null,
+  )
 
   const handleGenerate = async (): Promise<void> => {
     setError('Please enter a name.')
@@ -119,8 +124,13 @@ export const Content = () => {
               {isLoading ? 'Сочиняем...' : 'Сгенерировать'}
             </GenerateButton>
           </div>
+
           <div className='lg:col-span-7 h-full'>
-            <p>{generatedText}</p>
+            <ResultSection
+              content={generatedText}
+              isLoading={isLoading}
+              imageUrl={generatedImageUrl}
+            />
           </div>
         </div>
       </div>
