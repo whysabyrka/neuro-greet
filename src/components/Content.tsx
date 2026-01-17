@@ -1,4 +1,5 @@
 import { LANGUAGES } from '@/constants'
+import { generateGreeting } from '@/services/gemini'
 import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
 
@@ -12,6 +13,27 @@ export const Content = () => {
 
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
   const [language, setLanguage] = useState<LanguageType>('Русский')
+
+  const [generateText, setGenerateText] = useState<string>('')
+
+  const handleGenerate = async (): Promise<void> => {
+    if (!name.trim()) return
+
+    try {
+      const result = await generateGreeting(
+        occasion,
+        name,
+        age,
+        interests,
+        tone,
+        language,
+      )
+
+      setGenerateText(result)
+    } catch (error) {
+      console.error('Error in handleGenerate:', error)
+    }
+  }
 
   return (
     <main className='container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12'>
@@ -52,6 +74,15 @@ export const Content = () => {
         <br />
         <br />
 
+        {Object.values(ToneType).map((tone) => (
+          <button key={tone} onClick={() => setTone(tone)}>
+            {tone}
+          </button>
+        ))}
+
+        <br />
+        <br />
+
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as LanguageType)}
@@ -62,6 +93,11 @@ export const Content = () => {
             </option>
           ))}
         </select>
+
+        <br />
+        <br />
+
+        <button onClick={handleGenerate}>Создать магию</button>
       </div>
     </main>
   )
