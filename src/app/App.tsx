@@ -1,4 +1,4 @@
-import { Header, Content } from '@/components/index'
+import { Header, Content } from '@/components'
 
 export const App = () => {
   return (
