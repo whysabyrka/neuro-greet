@@ -1,4 +1,5 @@
-import { OccasionType } from '@/types'
+import { LANGUAGES } from '@/constants'
+import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
 
 export const Content = () => {
@@ -9,6 +10,9 @@ export const Content = () => {
 
   const [interests, setInterests] = useState<string>('')
 
+  const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
+  const [language, setLanguage] = useState<LanguageType>('Русский')
+
   return (
     <main className='container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12'>
       <div className='max-w-7xl mx-auto'>
@@ -18,6 +22,9 @@ export const Content = () => {
         <button onClick={() => setOccasion(OccasionType.NEW_YEAR)}>
           Новый Год
         </button>
+
+        <br />
+        <br />
 
         <input
           type='text'
@@ -32,12 +39,29 @@ export const Content = () => {
           onChange={(e) => setAge(e.target.value)}
         />
 
+        <br />
+        <br />
+
         <textarea
           rows={2}
           value={interests}
           placeholder='Путешествия, кодинг, котики'
           onChange={(e) => setInterests(e.target.value)}
         ></textarea>
+
+        <br />
+        <br />
+
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as LanguageType)}
+        >
+          {LANGUAGES.map((lang) => (
+            <option key={lang} value={lang}>
+              {lang}
+            </option>
+          ))}
+        </select>
       </div>
     </main>
   )
