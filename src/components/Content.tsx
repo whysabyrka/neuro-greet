@@ -1,14 +1,14 @@
-import { LANGUAGES } from '@/constants'
 import { generateGreeting } from '@/services'
 import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
 import {
   AppTitle,
   ExtraDetailsSection,
+  GenerateButton,
   OccasionButton,
   UserDetailsSection,
 } from '@/components'
-import { Cake, Snowflake } from 'lucide-react'
+import { Cake, Snowflake, Sparkles } from 'lucide-react'
 
 export const Content = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -111,13 +111,18 @@ export const Content = () => {
               setLanguage={setLanguage}
               setIsImageEnabled={setIsImageEnabled}
             />
-          </div>
-          <div className='lg:col-span-7 h-full'></div>
-        </div>
 
-        <button onClick={handleGenerate} disabled={isLoading}>
-          Создать магию
-        </button>
+            <GenerateButton isLoading={isLoading} onClick={handleGenerate}>
+              <Sparkles
+                className={`w-5 h-5 ${isLoading ? 'animate-spin' : 'group-hover:animate-pulse'}`}
+              />
+              {isLoading ? 'Сочиняем...' : 'Сгенерировать'}
+            </GenerateButton>
+          </div>
+          <div className='lg:col-span-7 h-full'>
+            <p>{generatedText}</p>
+          </div>
+        </div>
       </div>
     </main>
   )
