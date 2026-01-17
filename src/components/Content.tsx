@@ -1,5 +1,5 @@
 import { LANGUAGES } from '@/constants'
-import { generateGreeting } from '@/services/gemini'
+import { generateGreeting } from '@/services'
 import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
 
