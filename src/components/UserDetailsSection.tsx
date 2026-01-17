@@ -54,7 +54,11 @@ export const UserDetailsSection = ({
                 `}
             />
           </div>
-          <div className='text-red-500 mt-1'>{error}</div>
+          {error && (
+            <p className='text-red-500 text-sm ml-1 mt-1'>
+              {error}
+            </p>
+          )}
         </div>
 
         <div className='col-span-1 relative group'>

@@ -1,3 +1,7 @@
 export { Header } from './Header'
 export { Content } from './Content'
 export { AppTitle } from './AppTitle'
+export { OccasionButton } from './OccasionButton'
+export { UserDetailsSection } from './UserDetailsSection'
+export { ExtraDetailsSection } from './ExtraDetailsSection'
+export { ToneSelector } from './ToneSelector'

@@ -2,10 +2,13 @@ import { LANGUAGES } from '@/constants'
 import { generateGreeting } from '@/services'
 import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
-import { AppTitle } from '@/components'
-import { OccasionButton } from './OccasionButton'
+import {
+  AppTitle,
+  ExtraDetailsSection,
+  OccasionButton,
+  UserDetailsSection,
+} from '@/components'
 import { Cake, Snowflake } from 'lucide-react'
-import { UserDetailsSection } from './UserDetailsSection'
 
 export const Content = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -22,6 +25,8 @@ export const Content = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
+  const [isImageEnabled, setIsImageEnabled] = useState<boolean>(false)
 
   const handleGenerate = async (): Promise<void> => {
     setError('Please enter a name.')
@@ -96,35 +101,19 @@ export const Content = () => {
               setError={setError}
               setInterests={setInterests}
             />
+
+            <ExtraDetailsSection
+              error={error}
+              language={language}
+              selectedTone={tone}
+              isImageEnabled={isImageEnabled}
+              setTone={setTone}
+              setLanguage={setLanguage}
+              setIsImageEnabled={setIsImageEnabled}
+            />
           </div>
           <div className='lg:col-span-7 h-full'></div>
         </div>
-
-        <br />
-        <br />
-
-        {Object.values(ToneType).map((tone) => (
-          <button key={tone} onClick={() => setTone(tone)}>
-            {tone}
-          </button>
-        ))}
-
-        <br />
-        <br />
-
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value as LanguageType)}
-        >
-          {LANGUAGES.map((lang) => (
-            <option key={lang} value={lang}>
-              {lang}
-            </option>
-          ))}
-        </select>
-
-        <br />
-        <br />
 
         <button onClick={handleGenerate} disabled={isLoading}>
           Создать магию
