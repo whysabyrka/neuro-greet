@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# Генератор Поздравлений | Greeting generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Генератор Поздравлений** — это интерактивное веб-приложение, которое использует возможности искусственного интеллекта Google Gemini для создания уникальных, персонализированных поздравлений.
 
-Currently, two official plugins are available:
+Итак, в чем суть приложения?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Пользователь проходит простой путь из нескольких шагов:
 
-## React Compiler
+1.  Выбирает повод (День Рождения, Новый Год и т.д.).
+2.  Указывает данные получателя (имя, возраст, интересы).
+3.  Настраивает стиль поздравления (тон, язык).
+4.  При желании активирует генерацию визуальной открытки.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+В результате пользователь получает готовый текст поздравления и (опционально) уникальное изображение, сгенерированное нейросетью.
 
-## Expanding the ESLint configuration
+## Технологический стек
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend Framework:** React 19
+- **Язык программирования:** TypeScript
+- **Стилизация:** Tailwind CSS (для быстрой и адаптивной верстки)
+- **Иконки:** Lucide React
+- **Линтинг и Форматинг:** ESLint + Prettier
+- **AI API:** Google Gemini API (библиотека `@google/genai`)
+  - Модель для текста: `gemini-2.5-flash`
+  - Модель для изображений: `gemini-2.5-flash-image`
+- **Сборка/Среда:** Vite
+- **Деплой:** Render
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Запуск приложения
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- npm install (установка зависимостей)
+- npm run dev (запуск приложения)
+- npm run build (сборка приложения)
+- npm run preview (запуск собранного приложения)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<hr/>
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![image](./preview/1.png)
+![image](./preview/2.png)
