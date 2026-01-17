@@ -3,6 +3,8 @@ import { generateGreeting } from '@/services'
 import { OccasionType, ToneType, type LanguageType } from '@/types'
 import { useState } from 'react'
 import { AppTitle } from '@/components'
+import { OccasionButton } from './OccasionButton'
+import { Cake, Snowflake } from 'lucide-react'
 
 export const Content = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -68,12 +70,18 @@ export const Content = () => {
               </div>
 
               <div className='grid grid-cols-2 gap-4'>
-                <button onClick={() => setOccasion(OccasionType.BIRTHDAY)}>
-                  День Рождения
-                </button>
-                <button onClick={() => setOccasion(OccasionType.NEW_YEAR)}>
-                  Новый Год
-                </button>
+                <OccasionButton
+                  label={OccasionType.BIRTHDAY}
+                  icon={Cake}
+                  selected={occasion === OccasionType.BIRTHDAY}
+                  onClick={() => setOccasion(OccasionType.BIRTHDAY)}
+                />
+                <OccasionButton
+                  label={OccasionType.NEW_YEAR}
+                  icon={Snowflake}
+                  selected={occasion === OccasionType.NEW_YEAR}
+                  onClick={() => setOccasion(OccasionType.NEW_YEAR)}
+                />
               </div>
             </section>
           </div>
