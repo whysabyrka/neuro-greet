@@ -16,8 +16,16 @@ export const Content = () => {
 
   const [generateText, setGenerateText] = useState<string>('')
 
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+
   const handleGenerate = async (): Promise<void> => {
+    setError('Please enter a name.')
     if (!name.trim()) return
+
+    setError(null)
+    setIsLoading(true)
+    setGenerateText('')
 
     try {
       const result = await generateGreeting(
@@ -30,8 +38,14 @@ export const Content = () => {
       )
 
       setGenerateText(result)
-    } catch (error) {
-      console.error('Error in handleGenerate:', error)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message)
+      } else {
+        setError('An unexpected error occurred.')
+      }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -97,7 +111,9 @@ export const Content = () => {
         <br />
         <br />
 
-        <button onClick={handleGenerate}>Создать магию</button>
+        <button onClick={handleGenerate} disabled={isLoading}>
+          Создать магию
+        </button>
       </div>
     </main>
   )
