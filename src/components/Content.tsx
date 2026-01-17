@@ -14,7 +14,7 @@ export const Content = () => {
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
   const [language, setLanguage] = useState<LanguageType>('Русский')
 
-  const [generateText, setGenerateText] = useState<string>('')
+  const [generatedText, setGeneratedText] = useState<string>('')
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -25,7 +25,7 @@ export const Content = () => {
 
     setError(null)
     setIsLoading(true)
-    setGenerateText('')
+    setGeneratedText('')
 
     try {
       const result = await generateGreeting(
@@ -37,7 +37,7 @@ export const Content = () => {
         language,
       )
 
-      setGenerateText(result)
+      setGeneratedText(result)
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message)
