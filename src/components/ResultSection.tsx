@@ -25,6 +25,7 @@ export const ResultSection = ({
       console.error('Failed to copy text: ', error)
     }
   }
+
   return (
     <div className='bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-purple-100/50 h-full min-h-100 flex flex-col relative overflow-hidden border border-purple-50'>
       <div className='flex justify-between items-center mb-6'>

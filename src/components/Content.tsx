@@ -10,6 +10,7 @@ import {
   UserDetailsSection,
 } from '@/components'
 import { Cake, Snowflake, Sparkles } from 'lucide-react'
+import { generateGreetingImage } from '@/services/gemini'
 
 export const Content = () => {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -40,18 +41,24 @@ export const Content = () => {
     setError(null)
     setIsLoading(true)
     setGeneratedText('')
+    setGeneratedImageUrl(null)
 
     try {
-      const result = await generateGreeting(
-        occasion,
-        name,
-        age,
-        interests,
-        tone,
-        language,
-      )
+      const tasks: [Promise<string>, Promise<string | null>?] = [
+        generateGreeting(occasion, name, age, interests, tone, language),
+      ]
 
-      setGeneratedText(result)
+      if (isImageEnabled) {
+        tasks.push(generateGreetingImage(occasion, tone, interests))
+      }
+
+      const [textResult, imageResult] = await Promise.all(tasks)
+
+      setGeneratedText(textResult)
+
+      if (imageResult) {
+        setGeneratedImageUrl(imageResult)
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message)
